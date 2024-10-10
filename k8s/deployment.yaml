@@ -5,7 +5,7 @@ metadata:
   labels:
     app: "goserver"
 spec:
-  replicas: 10
+  replicas: 1
   selector:
     matchLabels:
       app: "goserver"
@@ -16,4 +16,25 @@ spec:
     spec:
       containers:
         - name: goserver
-          image: "joaocsv/hello-go:latest"
+          image: "joaocsv/hello-go:v2"
+          envFrom:
+            - configMapRef:
+                name: goserver-env
+
+          #env:
+          #  - name: "NAME"
+          #    valueFrom:
+          #      configMapKeyRef:
+          #        name: goserver-env
+          #        key: NAME
+          #  - name: "VERSION"
+          #    valueFrom:
+          #      configMapKeyRef:
+          #        name: goserver-env
+          #        key: VERSION
+
+          #env:
+          #  - name: "NAME"
+          #    value: "Sistema de Teste"
+          #  - name: "VERSION"
+          #    value: "1.200"
