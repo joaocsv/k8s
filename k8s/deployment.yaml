@@ -16,10 +16,24 @@ spec:
     spec:
       containers:
         - name: goserver
-          image: "joaocsv/hello-go:v2"
+          image: "joaocsv/hello-go:v3.2"
           envFrom:
             - configMapRef:
                 name: goserver-env
+            - secretRef:
+                name: goserver-secret
+          volumeMounts:
+            - mountPath: "/version"
+              name: versions
+              readOnly: true
+
+      volumes:
+        - name: versions
+          configMap:
+            name: configmap-file
+            items:
+              - key: versions
+                path: "versions.txt"
 
           #env:
           #  - name: "NAME"
