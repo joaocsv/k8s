@@ -21,7 +21,8 @@ func main() {
 
 func Healtz(w http.ResponseWriter, r *http.Request) {
 	duration := time.Since(startedAt)
-	if duration > 26 {
+
+	if duration.Seconds() > 26 {
 		w.WriteHeader(500)
 		_, err := w.Write([]byte(fmt.Sprintf("Duration: %v", duration.Seconds())))
 		if err != nil {

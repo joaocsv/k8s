@@ -16,7 +16,15 @@ spec:
     spec:
       containers:
         - name: goserver
-          image: "joaocsv/hello-go:v3.2"
+          image: "joaocsv/hello-go:v3.6"
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /healtz
+            periodSeconds: 5
+            failureThreshold: 1
+            timeoutSeconds: 1
+            successThreshold: 1
           envFrom:
             - configMapRef:
                 name: goserver-env
